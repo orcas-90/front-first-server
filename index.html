@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class="main">
+
+
+    <h1 class="title"></h1>
+    <div class="error"></div>
+    <p class="content"></p>
+  </body>
+  <script>
+
+    const title = document.querySelector('.title');
+    const loader = document.querySelector('.loader');
+    const errors = document.querySelector('.error');
+    const content = document.querySelector('.content');
+
+
+    //find.addEventListener('click', function () {
+      //find.disabled = true;
+     // loader.classList.remove('hidden');
+      errors.textContent = '';
+      content.textContent = '';
+      //const name = finderText.value;
+     // const json = 'data' + '/' + name + '.json';
+      fetch('http://localhost:3000 ')
+        .then((response) => response.json())
+        .then((result) => {
+
+         title.innerHTML =result.title;
+         content.innerHTML = result.content;
+         console.log(result)
+        })
+        .catch((error) => {
+          errors.textContent = 'Ошибка, ничего не найдено';
+        })
+        .finally(() => {
+          //find.disabled = false;
+         // loader.classList.add('hidden');
+        });
+  //  });
+  </script>
+</html>

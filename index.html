@@ -10,37 +10,19 @@
     <div class="error"></div>
     <p class="content"></p>
   </body>
+  <script src="request.js"></script>
   <script>
     const title = document.querySelector('.title');
-
-    const errors = document.querySelector('.error');
     const content = document.querySelector('.content');
+    let link = '';
 
-    fetch('http://localhost:3000 ')
-      .then((response) => response.json())
-      .then((result) => {
-        title.innerHTML = result.title;
-        content.innerHTML = result.content;
-        content.addEventListener('click', function () {
-          if (
-            event.target.nodeName === 'A' &&
-            event.target.getAttribute('href')
-          ) {
-            event.preventDefault();
-            let link = event.target.getAttribute('href');
-
-            fetch('http://localhost:3000' + link)
-              .then((response) => response.json())
-              .then((result) => {
-                title.innerHTML = result.title;
-                content.innerHTML = result.content;
-              });
-          }
-        });
-      })
-
-      .catch((error) => {
-        errors.textContent = 'Ошибка, ничего не найдено';
-      });
+    createContent();
+    content.addEventListener('click', function () {
+      if (event.target.nodeName === 'A' && event.target.getAttribute('href')) {
+        event.preventDefault();
+        link = event.target.getAttribute('href');
+      }
+      createContent();
+    });
   </script>
 </html>
